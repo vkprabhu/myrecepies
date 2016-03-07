@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-  resources :recipes
+  resources :recipes do
+    member do
+      post 'like'
+    end
+  end
   root 'home#index'
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
