@@ -26,6 +26,8 @@ gem 'carrierwave', '0.10.0'
 gem 'mini_magick', '3.8.0'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
+gem 'bcrypt'
+gem 'fog-aws'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

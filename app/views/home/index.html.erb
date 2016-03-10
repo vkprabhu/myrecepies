@@ -1,7 +1,7 @@
 <div class=" center jumbotron">
   <h1>Hello, Welcome to myRecepies App!</h1>
   <h2>This is the homepage</h2>
-  <%= link_to "Sign up now!", "", class: "btn btn-lg btn-success" %>
+  <%= link_to "Sign up now!", register_path , class: "btn btn-lg btn-success" %>
 </div>
 
 <div class="row">
@@ -12,9 +12,9 @@
     </div>
     
     <div class="col-lg-4">
-        <h3 class="midrow">View recepies as guest user</h3>
-        <h2 class="left">Browse and view recepies as guest and sign up later!</h2>
-        <p><%= link_to "Browse Recepie Listings", "", class: "btn btn-small btn-warning" %></p>
+        <h3 class="midrow">Sign in to your account</h3>
+        <h2 class="left">Add/update your recipes, create Like/dislike and much more!</h2>
+        <p><%= link_to "LogIn", login_path, class: "btn btn-small btn-warning" %></p>
     </div>
     
     <div class="col-lg-4">

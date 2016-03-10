@@ -7,8 +7,26 @@
     <div class="nav_item">
       <%= link_to "link 1", "", class:"btn btn-default btn-warning" %>
     </div>
-    <div class="nav_item">
-      <%= link_to "New recipe", new_recipe_path, class:"btn btn-default btn-warning" %>
-    </div>
+    <% if logged_in? %>
+      <div class="nav_item">
+        <%= link_to "New recipe", new_recipe_path, class:"btn btn-default btn-warning" %>
+      </div>
+      <div class="dropdown nav_item">
+         <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+         <%= current_user.chefname %>
+         <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+           <li><%= link_to 'View profile', chef_path(current_user) %></li>
+           <li><%= link_to 'Edit profile', edit_chef_path(current_user) %></li>
+           <li role="separator" class="divider"></li>
+           <li><%= link_to 'Logout', logout_path %></li>
+        </ul>
+      </div>
+    <% else %>
+      <div class="nav_item">
+        <%= link_to "LogIn", login_path, class:"btn btn-default btn-success" %>
+      </div>
+    <% end %>
   </div>
 </header>

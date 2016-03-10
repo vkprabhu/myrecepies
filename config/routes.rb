@@ -3,9 +3,18 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
   resources :recipes do
     member do
-      post 'like'
+      post 'like', to: 'recipes#like'
     end
   end
+  
+  get '/login', to: 'logins#new'
+  post '/login', to: 'logins#create'
+  get '/logout', to: 'logins#destroy'
+  
+  resources :chefs, except: :new
+  get '/register', to: 'chefs#new'
+
+  
   root 'home#index'
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
