@@ -63,9 +63,9 @@ class RecipesController < ApplicationController
         end
     end
     def require_user_like
-    if !logged_in?
-      flash[:warning] = "You must be logged in to perform the action"
-      redirect_to :back
+        if !logged_in?
+            flash[:warning] = "You must be logged in to perform the action"
+            redirect_to :back
+        end
     end
-  end
 end
