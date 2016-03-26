@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     end
   end
   
+  
   get '/login', to: 'logins#new'
   post '/login', to: 'logins#create'
   get '/logout', to: 'logins#destroy'
@@ -14,6 +15,8 @@ Rails.application.routes.draw do
   resources :chefs, except: :new
   get '/register', to: 'chefs#new'
 
+  resources :ingredients
+  resources :styles
   
   root 'home#index'
   # You can have the root of your site routed with "root"

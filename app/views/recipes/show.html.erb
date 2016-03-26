@@ -14,9 +14,17 @@
         <% end %>
         <h3><%= @recipe.summary %></h3>
         <div class="show_recipe">
-            <%= image_tag(@recipe.picture.url, class: "gravatar") if @recipe.picture? %>
+            <%= image_tag(@recipe.picture.url, size: "250x250", class: "gravatar") if @recipe.picture? %>
         </div>
         <div class="well">
+            <p>Style: <% @recipe.styles.each do |style| %>
+                <%= link_to style.name, style_path(style) %>
+                <% end %>
+            </p>
+            <p>Ingredient: <% @recipe.ingredients.each do |ingredient| %> 
+                <%= link_to ingredient.name, ingredient_path(ingredient) %>
+                <% end %>
+            </p>
             <p>
                 <strong>Steps:</strong>
             </p>
