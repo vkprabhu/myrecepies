@@ -21,26 +21,30 @@
         <div class="col-lg-6 well">
             <h4><%= link_to recipe.name, recipe_path(recipe) %></h4>
             <p><%= recipe.summary %></p>
-            <p>Style: <% recipe.styles.each do |style| %>
-                <%= link_to style.name, style_path(style) %>
-                <% end %>
-            </p>
-            <p>Ingredient: <% recipe.ingredients.each do |ingredient| %> 
-                <%= link_to ingredient.name, ingredient_path(ingredient) %>
-                <% end %>
-            </p>
+            <% if recipe.styles.any? %>
+                <p>Style: <% recipe.styles.each do |style| %>
+                    <%= link_to style.name, style_path(style) %>
+                    <% end %>
+                </p>
+            <% end %>
+            <% if recipe.ingredients.any? %>
+                <p>Ingredient: <% recipe.ingredients.each do |ingredient| %> 
+                    <%= link_to ingredient.name, ingredient_path(ingredient) %>
+                    <% end %>
+                </p>
+            <% end %>
             <p>
                 <span class="quite"><small> created: <%= time_ago_in_words(recipe.created_at) %> ago, </small></span>
                 <span class="quite"><small> updated: <%= time_ago_in_words(recipe.updated_at) %> ago </small></span>
             </p>
             <div class="pull-right">
                 <%= link_to like_recipe_path(recipe, like: true), method: :post do %>
-                    <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>&nbsp&nbsp 
+                    <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>&nbsp&nbsp <%= recipe.thumbs_up_total %>
                 <% end %>
             </div>
              <div class="pull-right">
                 <%= link_to like_recipe_path(recipe, like: false), method: :post do %>
-                    <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>&nbsp&nbsp
+                    <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>&nbsp&nbsp <%= recipe.thumbs_up_total %>
                 <% end %>
             </div>
         </div>

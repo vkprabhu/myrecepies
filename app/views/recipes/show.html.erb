@@ -17,14 +17,18 @@
             <%= image_tag(@recipe.picture.url, size: "250x250", class: "gravatar") if @recipe.picture? %>
         </div>
         <div class="well">
-            <p>Style: <% @recipe.styles.each do |style| %>
-                <%= link_to style.name, style_path(style) %>
-                <% end %>
-            </p>
-            <p>Ingredient: <% @recipe.ingredients.each do |ingredient| %> 
-                <%= link_to ingredient.name, ingredient_path(ingredient) %>
-                <% end %>
-            </p>
+            <% if @recipe.styles.any? %>
+                <p>Style: <% @recipe.styles.each do |style| %>
+                    <%= link_to style.name, style_path(style) %>
+                    <% end %>
+                </p>
+            <% end %>
+            <% if @recipe.ingredients.any? %>
+                <p>Ingredient: <% @recipe.ingredients.each do |ingredient| %> 
+                    <%= link_to ingredient.name, ingredient_path(ingredient) %>
+                    <% end %>
+                </p>
+            <% end 5>
             <p>
                 <strong>Steps:</strong>
             </p>
