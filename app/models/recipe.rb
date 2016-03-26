@@ -13,11 +13,11 @@ class Recipe < ActiveRecord::Base
     validate :picture_size
     
     def thumbs_up_total
-        self.likes.where('like= ?', true).size
+        self.likes.where('like= ?', true).count
     end
     
     def thumbs_down_total
-        self.likes.where('like= ?', false).size
+        self.likes.where('like= ?', false).count
     end
     
     private
