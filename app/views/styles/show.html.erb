@@ -22,11 +22,11 @@
             <h4><%= link_to recipe.name, recipe_path(recipe) %></h4>
             <p><%= recipe.summary %></p>
             <p>Style: <% recipe.styles.each do |style| %>
-                <%= link_to style.name, '' %>
+                <%= link_to style.name, style_path(style) %>
                 <% end %>
             </p>
             <p>Ingredient: <% recipe.ingredients.each do |ingredient| %> 
-                <%= link_to ingredient.name, '' %>
+                <%= link_to ingredient.name, ingredient_path(ingredient) %>
                 <% end %>
             </p>
             <p>
