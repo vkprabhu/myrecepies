@@ -6,7 +6,6 @@ class CommentsController < ApplicationController
     end
     
     def create
-        binding.pry
         @comment = Comment.new(comment_params)
         @comment.chef = current_user;
         if @comment.save
