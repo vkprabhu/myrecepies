@@ -33,6 +33,21 @@
                 <strong>Steps:</strong>
             </p>
             <%= simple_format(@recipe.description) %>
+            <p>
+                <%= link_to " New Comment", new_comment_path(recipe: @recipe) %>
+            </p>
+            <% if @recipe.comments.any? %>
+                <p><strong>Comments</strong></p>
+                <% @recipe.comments.each do |comment| %>
+                   <p> <%= comment.comment %> 
+                       <% if comment.chef == current_user %>
+                           <%= link_to comment_path(comment), method: :delete do %>
+                           <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                           <% end %>
+                        <% end %>
+                   </p>
+                <% end %>
+            <% end %>
             <div class="pull-right">
                 <%= link_to like_recipe_path(@recipe, like: true), method: :post do %>
                     <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>&nbsp 

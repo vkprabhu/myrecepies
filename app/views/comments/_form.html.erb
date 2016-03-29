@@ -1,0 +1,13 @@
+<%= render 'shared/errors', obj: @comment %>
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2 well">
+        <%= form_for @comment do |f| %>
+            <%= f.label :comment %>
+            <%= f.text_field :comment %>
+                
+            <%= f.hidden_field :recipe_id, value: @recipe.id %>
+            <%= f.submit(@comment.new_record? ? 'Create Recipe' : 'Edit Recipe', class: 'btn btn-success') %> 
+        <% end %>
+    </div>
+</div>

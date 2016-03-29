@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     end
   end
   
+  resources :comments
   
   get '/login', to: 'logins#new'
   post '/login', to: 'logins#create'
