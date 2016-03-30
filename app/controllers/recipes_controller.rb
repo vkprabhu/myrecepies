@@ -4,6 +4,7 @@ class RecipesController < ApplicationController
     before_action :require_user, except: [:index, :show, :like]
     before_action :require_user_like, only: [:like]
     before_action :require_same_user, only: [:edit]
+    before_action :require_admin, only: [:destroy]
     def index
         @recipes = Recipe.paginate(page: params[:page], per_page: 5)
     end
@@ -49,6 +50,13 @@ class RecipesController < ApplicationController
         end
     end
     
+    def destroy
+        @recipe = Recipe.find(params[:id])
+        @recipe.destroy
+        flash[:success] = "Receipe deleted!"
+        redirect_to recipes_path
+    end
+    
     private
     def recipe_params
         params.require(:recipe).permit(:name,:summary,:description,:picture,style_ids: [], ingredient_ids: [])
@@ -57,7 +65,7 @@ class RecipesController < ApplicationController
         @recipe = Recipe.find(params[:id])
     end
     def require_same_user
-        if current_user != @recipe.chef
+        if current_user != @recipe.chef and !current_user.admin
             flash[:warning] = "You can't update this recipe"
             redirect_to recipes_path
         end
@@ -68,4 +76,10 @@ class RecipesController < ApplicationController
             redirect_to :back
         end
     end
+    def require_admin
+        if !current_user.admin
+            flash[:failure] = "You can't delete! Only Admin can do"
+            redirect_to recipes_path
+        end
+    end    
 end

@@ -9,8 +9,11 @@
         </p>
     </div>
     <div class="col-md-8 ">
-        <% if logged_in? and @recipe.chef == current_user %>
+        <% if logged_in? and (@recipe.chef == current_user || current_user.admin) %>
             <%= link_to 'Edit this recipe', edit_recipe_path(@recipe), class: 'btn btn-success pull-right' %>
+        <% end %>
+        <% if current_user.admin %>
+            <%= link_to "Delete Receipe", @recipe, method: :delete, data: { confirm: "Are you sure?" } %>
         <% end %>
         <h3><%= @recipe.summary %></h3>
         <div class="show_recipe">
@@ -33,21 +36,6 @@
                 <strong>Steps:</strong>
             </p>
             <%= simple_format(@recipe.description) %>
-            <p>
-                <%= link_to " New Comment", new_comment_path(recipe: @recipe) %>
-            </p>
-            <% if @recipe.comments.any? %>
-                <p><strong>Comments</strong></p>
-                <% @recipe.comments.each do |comment| %>
-                   <p> <%= comment.comment %> 
-                       <% if comment.chef == current_user %>
-                           <%= link_to comment_path(comment), method: :delete do %>
-                           <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                           <% end %>
-                        <% end %>
-                   </p>
-                <% end %>
-            <% end %>
             <div class="pull-right">
                 <%= link_to like_recipe_path(@recipe, like: true), method: :post do %>
                     <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>&nbsp 
@@ -59,5 +47,23 @@
         </div>
     </div>
 </div>
+<p>
+<%= link_to " New Comment", new_comment_path(recipe: @recipe) %>
+</p>
+<% if @recipe.comments.any? %>
+    <p><strong>Comments</strong></p>
+    <% @recipe.comments.each do |comment| %>
+        <p> <%= comment.comment %> 
+        <% if comment.chef == current_user %>
+            <%= link_to comment_path(comment), method: :delete do %>
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            <% end %>
+            <%= link_to edit_comment_path(comment,recipe: @recipe) do %>
+                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+            <% end %>
+        <% end %>
+    </p>
+    <% end %>
+<% end %>
 
 <%= link_to 'Recturn to recipes listings', recipes_path, class: 'btn btn-warning btn-small ' %>

@@ -15,7 +15,7 @@ class ChefsController < ApplicationController
         @chef = Chef.new(chef_params)
         if @chef.save
             flash[:success] = "You have been successfully registered!"
-            session[:chef] = @chef 
+            #session[:chef] = @chef 
             redirect_to chefs_path
         else
             render 'new'

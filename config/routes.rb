@@ -3,17 +3,17 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
   resources :recipes do
     member do
-      post 'like', to: 'recipes#like'
+      post '/like', to: 'recipes#like'
     end
   end
   
-  resources :comments
+  resources :comments 
   
   get '/login', to: 'logins#new'
   post '/login', to: 'logins#create'
   get '/logout', to: 'logins#destroy'
   
-  resources :chefs, except: :new
+  resources :chefs, except: [:new, :destroy]
   get '/register', to: 'chefs#new'
 
   resources :ingredients
